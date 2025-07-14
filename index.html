@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SkidWare AutoBypasser v1.4</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="snow-canvas"></canvas>
+
+  <div id="app">
+    <div class="header">
+      <img src="logo.png" alt="SkidWare Logo" class="logo" />
+      <h1>SkidWare AutoBypasser v1.4</h1>
+      <div id="datetime"></div>
+    </div>
+
+    <div class="tab-bar">
+      <button id="tab-bypass" onclick="switchTab('bypass')" class="active">Bypass</button>
+      <button id="tab-settings" onclick="switchTab('settings')">Settings</button>
+      <button id="tab-user" onclick="switchTab('user')">User</button>
+      <button id="tab-premium" onclick="switchTab('premium')">Premium</button>
+      <button id="tab-about" onclick="switchTab('about')">About</button>
+    </div>
+
+    <div id="bypass" class="tab">
+      <label for="methodSelect">Select Method:</label>
+      <select id="methodSelect" onchange="updateOutput()">
+        <option value="basic">Basic</option>
+        <option value="legit">Legit</option>
+      </select>
+
+      <input type="text" id="input" placeholder="Type text to obfuscate..." oninput="updateOutput()" />
+
+      <textarea id="output" readonly placeholder="Obfuscated output will appear here..."></textarea>
+
+      <button id="copyBtn" onclick="copyText()" disabled>Copy Output</button>
+      <button id="clearBtn" onclick="clearText()" disabled>Clear Input</button>
+    </div>
+
+    <div id="settings" class="tab hidden">
+      <h2>Customize Appearance</h2>
+      <label>
+        Button Color:
+        <input type="color" id="buttonColorPicker" value="#9333ea" onchange="updateButtonColor(this.value)" />
+      </label>
+      <br />
+
+      <label>
+        Glow Effect:
+        <input type="checkbox" id="glowToggle" checked onchange="toggleGlow()" />
+      </label>
+      <br />
+
+      <label>
+        Font Size:
+        <input type="range" id="fontSizeSlider" min="12" max="28" value="16" onchange="updateFontSize(this.value)" disabled />
+        <span id="fontSizeValue">16</span>px
+      </label>
+      <br />
+
+      <label>
+        Snowfall Enabled:
+        <input type="checkbox" id="snowToggle" checked onchange="toggleSnowfall()" />
+      </label>
+      <br />
+
+      <label>
+        Snowfall Color:
+        <input type="color" id="snowColorPicker" value="#ffffff" onchange="updateSnowColor(this.value)" disabled />
+      </label>
+      <br />
+
+      <label>
+        Snowfall Speed:
+        <input type="range" id="snowSpeedSlider" min="0.1" max="3" step="0.1" value="1" onchange="updateSnowSpeed(this.value)" />
+        <span id="snowSpeedValue">1</span>
+      </label>
+    </div>
+
+    <div id="user" class="tab hidden">
+      <h2>User Info</h2>
+      <p>Current Date/Time: <span id="userDateTime"></span></p>
+      <label>
+        Enter Premium Key:
+        <input type="text" id="keyInput" placeholder="Enter your key here" />
+      </label>
+      <button onclick="validateKey()">Unlock Premium</button>
+      <p id="keyStatus"></p>
+    </div>
+
+    <div id="premium" class="tab hidden">
+      <h2>Premium Features</h2>
+      <ul>
+        <li>Copy Output</li>
+        <li>Clear Input</li>
+        <li>Customize Font Size</li>
+        <li>Customize Snowfall Color</li>
+        <li>Glow Effect Toggle</li>
+        <!-- Add more premium features here -->
+      </ul>
+    </div>
+
+    <div id="about" class="tab hidden">
+      <h2>About SkidWare</h2>
+      <img src="https://avatars.githubusercontent.com/u/196281227?v=4" alt="Developer Avatar" class="dev-avatar" />
+      <p>Developed by <a href="https://github.com/4fw4" target="_blank">4fw4</a></p>
+      <p>SkidWare AutoBypasser v1.4 is a tool to obfuscate text for advanced chat filters.</p>
+      <p>All input are logged anonymously, with your consent.</p>
+    </div>
+  </div>
+
+  <div id="notification"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SkidWare Logs Viewer</title>
+  <style>
+    body { background: #0a0a0a; color: #ddd; font-family: monospace; max-width: 900px; margin: auto; padding: 2rem; }
+    h1 { color: #9333ea; text-align: center; }
+    #logs { background: #111; padding: 1rem; border-radius: 8px; box-shadow: 0 0 10px #9333ea88; max-height: 500px; overflow-y: scroll; }
+    .log-entry { border-bottom: 1px solid #333; margin-bottom: 0.5rem; padding-bottom: 0.5rem; }
+    .timestamp { color: #b47aff; }
+    .method { color: #66ff66; margin-left: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>SkidWare Logs Viewer</h1>
+  <div id="logs">Loading logs...</div>
+  <script>
+    async function loadLogs() {
+      const res = await fetch('/logs');
+      const data = await res.json();
+      const container = document.getElementById('logs');
+      container.innerHTML = "";
+      data.reverse().forEach(log => {
+        const div = document.createElement('div');
+        div.className = 'log-entry';
+        div.innerHTML = '<span class="timestamp">' + new Date(log.timestamp).toLocaleString() + '</span>' +
+                        '<span class="method">[' + (log.method || "unknown") + ']</span>' +
+                        '<div>' + (log.input || "") + '</div>';
+        container.appendChild(div);
+      });
+    }
+    loadLogs();
+  </script>
+</body>
+</html>
