@@ -42,6 +42,16 @@ def view_json_logs():
 def view_logs_page():
     return render_template('logs.html')
 
+from flask import Flask
+
+app = Flask(__name__, static_folder='static')
+
+@app.route('/')
+def root():
+    return app.send_static_file('index.html')
+
+# your other routes here...
+
 if __name__ == '__main__':
     import os
     port = int(os.environ.get('PORT', 5000))
